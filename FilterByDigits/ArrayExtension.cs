@@ -5,6 +5,29 @@ namespace FilterTask
 {
     public static class ArrayExtension
     {
+        public static bool IsNumberRight(int number, int digit)
+        {
+            if (number < 0)
+            {
+                number = -number;
+            }
+
+            int rest = number % 10;
+            do
+            {
+                if (rest == digit)
+                {
+                    return true;
+                }
+
+                number /= 10;
+                rest = number % 10;
+            }
+            while (number != 0);
+
+            return false;
+        }
+
         /// <summary>
         /// Returns new array of elements that contain expected digit from source array.
         /// </summary>
@@ -21,12 +44,12 @@ namespace FilterTask
         {
             if (digit > 9 | digit < 0)
             {
-                throw new ArgumentOutOfRangeException("digit value is out of range (0..9).");
+                throw new ArgumentOutOfRangeException(nameof(digit), "digit value is out of range (0..9).");
             }
 
             if (source == null)
             {
-                throw new ArgumentNullException("array is null.");
+                throw new ArgumentNullException(nameof(source), "array is null.");
             }
 
             if (source.Length == 0)
@@ -35,33 +58,11 @@ namespace FilterTask
             }
 
             List<int> result = new List<int>();
-            foreach (int num in source)
+            for (int i = 0; i < source.Length; i++)
             {
-                string numStr = num.ToString();
-                foreach (char charNum in numStr)
+                if (IsNumberRight(source[i], digit))
                 {
-                    double CharToNum(char a) => a switch
-                    {
-                        '0' => 0,
-                        '1' => 1,
-                        '2' => 2,
-                        '3' => 3,
-                        '4' => 4,
-                        '5' => 5,
-                        '6' => 6,
-                        '7' => 7,
-                        '8' => 8,
-                        '9' => 9,
-                        '-' => -1,
-                        _ => 0,
-                    };
-                    if (CharToNum(charNum) == digit)
-                    {
-                        result.Add(num);
-                    }
-
-                    if (CharToNum(charNum) == digit)
-                         break;
+                    result.Add(source[i]);
                 }
             }
 
