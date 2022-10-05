@@ -5,6 +5,9 @@ namespace FilterTask
 {
     public static class ArrayExtension
     {
+        /// <summary>
+        /// Returns true if number contains given digit othervise returns false.
+        /// </summary>
         public static bool IsNumberRight(int number, int digit)
         {
             if (number < 0)
