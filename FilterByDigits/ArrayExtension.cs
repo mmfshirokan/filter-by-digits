@@ -6,32 +6,6 @@ namespace FilterTask
     public static class ArrayExtension
     {
         /// <summary>
-        /// Returns true if number contains given digit othervise returns false.
-        /// </summary>
-        public static bool IsNumberRight(int number, int digit)
-        {
-            if (number < 0)
-            {
-                number = -number;
-            }
-
-            int rest = number % 10;
-            do
-            {
-                if (rest == digit)
-                {
-                    return true;
-                }
-
-                number /= 10;
-                rest = number % 10;
-            }
-            while (number != 0);
-
-            return false;
-        }
-
-        /// <summary>
         /// Returns new array of elements that contain expected digit from source array.
         /// </summary>
         /// <param name="source">Source array.</param>
@@ -70,6 +44,29 @@ namespace FilterTask
             }
 
             return result.ToArray();
+        }
+
+        private static bool IsNumberRight(int number, int digit)
+        {
+            if (number < 0)
+            {
+                number = -number;
+            }
+
+            int rest = number % 10;
+            do
+            {
+                if (rest == digit)
+                {
+                    return true;
+                }
+
+                number /= 10;
+                rest = number % 10;
+            }
+            while (number != 0);
+
+            return false;
         }
     }
 }
